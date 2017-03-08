@@ -14,9 +14,13 @@ angular
     "$stateProvider",
     RouterFunction
   ])
-  .controller("WdinstagramIndexController", [
-    WdinstagramIndexControllerFunction
+  .factory( "WdinstagramFactory", [
+    WdinstagramFactoryFunction
   ])
+  .controller("WdinstagramIndexController", [
+    "WdinstagramFactory",
+    WdinstagramIndexControllerFunction
+  ]);
 
   function RouterFunction($stateProvider){
     $stateProvider
@@ -32,6 +36,14 @@ angular
     });
   }
 
-  function WdinstagramIndexControllerFunction() {
-    this.wdinstagrams = wdinstagramData;
+  function WdinstagramIndexControllerFunction( WdinstagramFactory ){
+    WdinstagramFactory.hellowWorld();
+  }
+
+  function WdinstagramFactoryFunction(){
+    return {
+      hellowWorld: function(){
+        console.log("hello World");
+      }
+    }
   }
