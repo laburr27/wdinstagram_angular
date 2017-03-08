@@ -10,8 +10,24 @@ angular
   .module("wdinstagramApp", [
     "ui.router"
   ])
-  .controller("wdinstagramCtrl", [ wdinstagramController])
+  .config([
+    "$stateProvider",
+    RouterFunction
+  ])
+  .controller("WdinstagramController", [
+    WdinstagramControllerFunction
+  ])
 
-  function wdinstagramController () {
+  function RouterFunction($stateProvider){
+    $stateProvider
+    .state("wdinstagramIndex", {
+      url: "/wdinstagrams",
+      templateUrl: "js/ng-views/index.html",
+      controller: "WdinstaramIndexController",
+      controllerAs: "vm"
+    })
+  }
+
+  function WdinstagramController () {
     this.wdinstagrams = wdinstagramData;
   }
