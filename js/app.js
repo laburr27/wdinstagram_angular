@@ -9,17 +9,24 @@ let wdinstagramData = [
 angular
   .module("wdinstagramApp", [
     "ui.router"
+    "ngResource"
   ])
   .config([
     "$stateProvider",
     RouterFunction
   ])
   .factory( "WdinstagramFactory", [
+    "$resource",
     WdinstagramFactoryFunction
   ])
   .controller("WdinstagramIndexController", [
     "WdinstagramFactory",
     WdinstagramIndexControllerFunction
+  ])
+  .controller("WdinstagramShowController", [
+    "WdinstagramFactory",
+    "$stateParams",
+    WdinstagramShowControllerFunction
   ]);
 
   function RouterFunction($stateProvider){
@@ -33,17 +40,19 @@ angular
     .state("wdinstagramShow", {
       url: "/wdinstagrams/:id",
       templateUrl: "js/ng-views/show.html"
+      controller: "WdinstagramShowController",
+      controllerAs: "vm"
     });
   }
 
-  function WdinstagramIndexControllerFunction( WdinstagramFactory ){
-    WdinstagramFactory.hellowWorld();
+  function WdinstagramFactoryFunction($resource){
+    return $resource( "http//localhost:3000/wdinstagrams/:id");
   }
 
-  function WdinstagramFactoryFunction(){
-    return {
-      hellowWorld: function(){
-        console.log("hello World");
-      }
-    }
+  function WdinstagramIndexControllerFunction( WdinstagramFactory ){
+    this.wdinstagrams = WdinstagramFactory.query();
+  }
+
+  function WdinstagramShowControllerFunction(WdinstagramFactory, $stateParams){
+    this.wdinstagram = WdinstagramFactory.get({id: $stateParams.id});
   }

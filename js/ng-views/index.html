@@ -1,5 +1,5 @@
 <h2>All the WDInstagrams</h2>
 
 <div data-ng-repeat="wdinstagram in vm.wdinstagrams">
-  <p>{{wdinstagram.title}}</p>
+  <p><a data-ui-sref="wdinstagramShow({id: wdinstagram.id})">{{wdinstagram.title}}</a></p>
 </div>
