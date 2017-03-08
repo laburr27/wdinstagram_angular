@@ -1,8 +1,5 @@
-<div>
-  <ul>
-    <li data-ng-repeat="x in vm.wdinstagrams">
-      <p>{{x.title}} - {{x.author}}</p>
-      <img ng-src={{x.img_url}}>
-    </li>
-  </ul>
+<h2>All the WDInstagrams</h2>
+
+<div data-ng-repeat="wdinstagram in vm.wdinstagrams">
+  <p>{{wdinstagram.title}}</p>
 </div>

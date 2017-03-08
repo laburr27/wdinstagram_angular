@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 let wdinstagramData = [
   { title: "Hey", author: "Me", img_url:"http://media-cache-ak0.pinimg.com/736x/02/b9/4e/02b94e2ce1c16f5a61a4f0cf249e5919.jpg" },
@@ -14,8 +14,8 @@ angular
     "$stateProvider",
     RouterFunction
   ])
-  .controller("WdinstagramController", [
-    WdinstagramControllerFunction
+  .controller("WdinstagramIndexController", [
+    WdinstagramIndexControllerFunction
   ])
 
   function RouterFunction($stateProvider){
@@ -23,11 +23,15 @@ angular
     .state("wdinstagramIndex", {
       url: "/wdinstagrams",
       templateUrl: "js/ng-views/index.html",
-      controller: "WdinstaramIndexController",
+      controller: "WdinstagramIndexController",
       controllerAs: "vm"
     })
+    .state("wdinstagramShow", {
+      url: "/wdinstagrams/:id",
+      templateUrl: "js/ng-views/show.html"
+    });
   }
 
-  function WdinstagramController () {
+  function WdinstagramIndexControllerFunction() {
     this.wdinstagrams = wdinstagramData;
   }
